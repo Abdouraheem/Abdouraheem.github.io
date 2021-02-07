@@ -25,7 +25,7 @@
             </tr>
           </thead>
           <tbody>
-          
+      
           </tbody>
         </table>
     
@@ -42,7 +42,7 @@
       $("h3").empty();
       $("tbody").empty();
       $.ajax({
-        url: "http://jsonplaceholder.typicode.com/users",
+        url: "https://jsonplaceholder.typicode.com/users",
           type: 'GET',
           success: function(data) {
               $.each(data, function(idx, value){
@@ -58,7 +58,7 @@
 
       function getUserPosts(user){
         $.ajax({
-          url: "http://jsonplaceholder.typicode.com/posts?userId=" + user.id,
+          url: "https://jsonplaceholder.typicode.com/posts?userId=" + user.id,
           type: 'GET',
           success: function(data) {
               $.each(data, function(idx, value){
@@ -73,8 +73,6 @@
           }
         });
       }
-
-      
 
     });
   </script>
