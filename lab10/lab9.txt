@@ -1,0 +1,3 @@
+==> The preventDefault() method is used to cancel a cancelable event, meaning that the default action that belongs to the event will not occur.
+
+==> A jQuery plugin is a a set of file(s) that contain piece of code that provides useful jQuery methods which can  used along with jQuery library methods.

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html >
+<head>
+<meta content="text/html; charset=utf-8" />
+  <title>Parsing  JSON</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+</head>
+<body>
+  
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-head">
+        <input type="text" class="form-control" placeholder="Enter user ID" id="userId">
+        <button type="button" id="searchBtn" class="btn btn-primary">Search</button>
+      </div>
+      <div class="panel-body">
+        <h2></h2>
+        <h3></h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Body</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          
+          </tbody>
+        </table>
+    
+      </div>
+    </div>
+  </div>
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(".panel-body").hide();
+    $("#searchBtn").click(function(){
+      $("h2").empty();
+      $("h3").empty();
+      $("tbody").empty();
+      $.ajax({
+        url: "http://jsonplaceholder.typicode.com/users",
+          type: 'GET',
+          success: function(data) {
+              $.each(data, function(idx, value){
+                  if (value.id == $("#userId").val()) {
+                    getUserPosts(value);
+                  }
+              });
+          },
+          error: function(xhr, status, exception){
+            alert("Error!!!");
+          }
+      });
+
+      function getUserPosts(user){
+        $.ajax({
+          url: "http://jsonplaceholder.typicode.com/posts?userId=" + user.id,
+          type: 'GET',
+          success: function(data) {
+              $.each(data, function(idx, value){
+                  $("h2").text(user.username);
+                  $("h3").text(user.email);
+                  $(".panel-body").show();
+                  $("tbody").append("<tr><td>" + value.title + "</td><td>" + value.body + "</td><td><a>Comments</a></td></tr>");
+              });
+          },
+          error: function(xhr, status, exception){
+            alert("Error!!!");
+          }
+        });
+      }
+
+      
+
+    });
+  </script>
+</body>
+</html>
